@@ -1,0 +1,53 @@
+import pywhatkit
+# syntax: phone number with country code, message, hour and minutes
+import openpyxl as xl
+wb=xl.load_workbook(r'E:\2022-23 Even\ISPRC\ISPRC IDEATHON\Email invitation\Book1.xlsx')
+sheet1=wb.get_sheet_by_name('Sheet1')
+names=[]
+emails=[]
+team=[]
+team_id=[]
+cat=[]
+mob=[]
+for cell in sheet1['A']:
+    emails.append(cell.value)
+
+for cell in sheet1['B']:
+    names.append(cell.value)
+
+for cell in sheet1['C']:
+    team.append(cell.value)
+
+for cell in sheet1['D']:
+    cat.append(cell.value)
+
+for cell in sheet1['E']:
+    team_id.append(cell.value)
+
+for cell in sheet1['F']:
+    mob.append(cell.value)
+
+for i in range(len(emails)):
+    message = ''' Dear {},\n
+     
+              Congratulations on being shortlisted for the ISPRC IDEATHON 2022 .
+               As per our records,
+               Your Team Name : {},
+               Category : {},
+               and the generated Team ID is {}.
+               The event is scheduled on 22.12.2022  Details of event is added in the brochure.
+               kindly  check your mail id {} for more details and get your on duty before the event.
+               Get prepared and give your best shot!
+               We wish you all the best for the coming battle.
+               you are welcome to join in ISPRC IDEATHON DOUBT CLEARANCE SESSION
+                                            Saturday, December 17 · 5:00 – 6:00pm
+                                            Google Meet joining info
+                                            Video call link: https://meet.google.com/wsu-izaw-qga
+                                            Or dial: ‪(US) +1 405-531-9032‬ PIN: ‪689 082 768‬#
+               For More Details Kindly Contact Mr.R.Immanual, ISPRC IDEATHON Coordinator, Ph No: +91 9677817992 
+
+               Thank you!!.  \n\v
+               With Regards 
+              Mr.R.Immanual, 9677817992\n\v
+                                            '''.format(names[i],team[i],cat[i],team_id[i],emails[i])
+    pywhatkit.sendwhatmsg_instantly('+91'+str(mob[i]), message, 10, tab_close=True)
